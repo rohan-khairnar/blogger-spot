@@ -9,24 +9,27 @@ from sqlalchemy import (
     Index,
     Integer,
     Text,
+    DateTime,
+    ForeignKey,
     UnicodeText
     )
 from sqlalchemy import MetaData
+import datetime
 
 #metadata is the module that converts Python code into real sql statements, specially for creating tables.
 metadata = MetaData()
 
-"""
-Create products table. 
-contains all products for sales.
-prodcode = products code. unique for each product.
-prodrate = products rate.
-prodname = products name.
-proddesc = products description.
-"""
-products = Table('products',metadata,
-        Column('prodcode',Integer, primary_key=True),
-        Column('prodrate',Integer,nullable=False),
-        Column('prodname',UnicodeText,nullable=False),
-        Column('proddesc',Text)
+users = Table('users',metadata,
+        Column('userid',Integer, primary_key=True),
+        Column('username',Text,nullable=False),
+        Column('userpassword',UnicodeText,nullable=False)
 )
+
+blogs = Table('blogs',metadata,
+        Column('blogid', Integer, primary_key=True),
+        Column('userid', Integer, ForeignKey('users.userid'), primary_key=True ),
+        Column('blogtitle',Text,nullable=False),
+        Column('blogdescription', UnicodeText, nullable=False),
+        Column('entrydate',DateTime,nullable=False, default=datetime.datetime.now().date())
+)
+

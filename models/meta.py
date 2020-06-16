@@ -5,15 +5,15 @@ import sqlalchemy as sa
 import os
 
 def dbcreate():
-    uri = "mysql+pymysql://%s:%s@%s" % (os.environ.get('DB_USERNAME'),os.environ.get('DB_PASSWORD'), os.environ.get('DB_HOST'))
+    uri = "postgres://postgres:pass@localhost"
     eng = sa.create_engine(uri, echo=False)
     conn = eng.connect()
     conn.execute("commit")
-    conn.execute("create database sadguru")
+    conn.execute("create database blogger")
     conn.close()
-    return (uri+'/sadguru')
+    return (uri+'/blogger')
 
 def dbconnect():
-    uri = "mysql+pymysql://%s:%s@%s/sadguru" % (os.environ.get('DB_USERNAME'),os.environ.get('DB_PASSWORD'), os.environ.get('DB_HOST'))
+    uri = "postgres://postgres:pass@localhost/blogger" 
     engine = sa.create_engine(uri, echo=False)
     return engine
