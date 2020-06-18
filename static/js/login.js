@@ -91,6 +91,8 @@ $(document).ready(function(){
             });
             return false;
         }
+        var special_characters = /([~,!,@,#,$,%,^,&,*,-,_,+,=,?,>,<])/;
+        
         if($("#saveid").val()==''){
             $("#register-alert-name").show();
             $("#register-alert-name").fadeTo(2250, 500).slideUp(500, function(){
@@ -98,6 +100,14 @@ $(document).ready(function(){
             });
             return false;
         }
+        if($('#saveid').val().match(special_characters)){
+            $("#register-alert-id").show();
+            $("#register-alert-id").fadeTo(2250, 500).slideUp(500, function(){
+            $("#register-alert-id").hide();
+            });
+            return false;
+        }
+
         if($("#savepass").val()==''){
             $("#register-alert-pass").show();
             $("#register-alert-pass").fadeTo(2250, 500).slideUp(500, function(){
@@ -109,7 +119,6 @@ $(document).ready(function(){
         // password validations
         var number = /([0-9])/;
         var alphabets = /([a-zA-Z])/;
-        var special_characters = /([~,!,@,#,$,%,^,&,*,-,_,+,=,?,>,<])/;
         if($('#savepass').val().length<6) {
         $('#password-strength-status').html("Weak (should be atleast 6 characters.)");
         return false;
