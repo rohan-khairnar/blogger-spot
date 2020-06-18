@@ -1,0 +1,90 @@
+{%extends "base.html"%}
+{% block content %}
+<!-- This Page is use to add, edit and delete single blog. -->
+<style>
+    .div_center{
+      background-color: rgba(235, 236, 238, 0.548); 
+      height:inherit; 
+      width:100%;
+      margin: auto;
+      border: 1px solid #73AD21;
+      padding: 10px; 
+      position: relative;
+       overflow-x: hidden; 
+        overflow-x: auto; 
+    }
+    body, html {
+  height: 100%;
+  margin: 0;
+}
+.add-blog-div{
+    border: solid 1px black;
+    height: 100%;width: 60%;
+    margin-left: 20%;
+    margin-right: 20%;
+    padding: 10px;
+}
+input{
+    width: 90%;
+    height: 20px;
+}
+textarea{
+    resize: vertical;
+}
+.delete_btn{
+float: right;background-color:rgb(236, 99, 99);color:white;
+height: 40px;width: 40px;
+border-radius: 50%;
+}
+</style>
+
+<script src="{{url_for('static', filename='js/singleblog.js')}}"></script>
+
+
+<div class='add-blog-div'>
+<!-- When type is add it render this part which use to add new blog deatils -->
+    {%if type == 'add'%}
+    <form action="/add-blog" method="post">
+        <label for="blogtitle"><strong>Title : </strong></label>
+            <input type="text" id="blogtitle" name="blogtitle"><br>
+            
+        <label for="blogdescription"><strong>Description : </strong></label>
+            <textarea rows="7" style="width:100%" name="blogdescription" id="blogdescription"></textarea> 
+        <input type="number" for='userid' id="userid" name="userid" hidden>
+        <input id="save" style="width:100px; height:30px;padding-top:1px" type="submit" value="Save"></input>
+
+    </form>
+    {% endif %}
+
+<!-- add part is end -->
+
+<!-- edit part to edit existing blogs data -->
+    {% if type == 'edit' %}
+    <div id ="update-success" class="alert" hidden>
+        <strong>Blog Is Updated!</strong>
+    </div>
+    <div id ="update-failed" class="alert" hidden>
+        <strong>Blog Update Faied!</strong>
+    </div>
+    <div id ="delete-success" class="alert" hidden>
+        <strong>Blog Is deleted!</strong>
+    </div>
+    <div id ="delete-failed" class="alert" hidden>
+        <strong>Blog delete Faied!</strong>
+    </div>
+    <!-- Delete button -->
+    <button class = "delete_btn"id="delete-btn" style=""><a class="lni-trash"></a></button><br>
+   
+        <label for="blogtitle"><strong>Title : </strong></label>
+            <input type="text" id="title" name="blogtitle" value="{{blog_data['blogtitle']}}"><br>
+            
+        <label for="blogdescription"><strong>Description : </strong></label>
+            <textarea rows="7" style="width:100%" name="blogdescription" id="description">{{blog_data['blogdescription']}}</textarea> 
+        
+        <input  for='blogid' id="blogid" name="blogid" value='{{blogid}}' hidden>
+        <input id="update" style="width:100px; height:30px;padding-top:1px" type="submit" value="update"></input>
+    {% endif %}
+    <!-- edit part ends -->
+    
+</div>
+{% endblock %}

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+
+<!-- This file is use for constant upper part of webpage -->
+
+{%block head%}
+<html>
+    <style>
+        .logo{
+    float: left;
+    padding-left: 3%;
+    height: 60px;
+    width: 60px;
+}
+
+.login {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 10px 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 12px;
+  height: 12%; width: 15%;
+  margin-top: 1%; float: right; 
+  margin-right: 2%;
+}
+.logout{
+    background-color: rgb(112, 27, 27);
+    width: 5%;
+}
+body{
+    background-color: rgb(135, 196, 161);
+}
+    </style>
+    <link rel="stylesheet" href="{{url_for('static',filename = 'css/LineIcons.css')}}">
+    <script src="{{url_for('static', filename='js/jquery.js')}}"></script>
+    <title> Blogger's Spot </title>
+    
+    <body >
+        <div class="head">
+            <div>
+                <a href="/"> <img class="logo" src="{{url_for('static', filename='images/logo.png')}}"> </a>
+                <h style="float: left;padding-top:2%;padding-left:2%">Blogger Spot</h>
+                <link rel="shortcut icon" href="{{url_for('static',filename = 'images/logo.png')}}" type="image/png')}}">
+            </div>
+            <a href="/" id="logoutbtn" class="login logout">Logout</a>
+            <a href="{{url_for('loginPage')}}" id="loginbtn" class="login">Login / Create Profile</a>
+            
+        </div>
+        {%endblock%}
+
+        <!-- Other pages will be render inside this block -->
+        <div class="div_center">
+            {%block content%}
+            {%endblock%}
+        </div>
+
+    </body>
+</html>

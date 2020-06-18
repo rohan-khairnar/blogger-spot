@@ -4,6 +4,7 @@
 import sqlalchemy as sa
 import os
 
+# It will create database at innitial.
 def dbcreate():
     uri = "postgres://postgres:pass@localhost"
     eng = sa.create_engine(uri, echo=False)
@@ -13,6 +14,7 @@ def dbcreate():
     conn.close()
     return (uri+'/blogger')
 
+# create database engine.
 def dbconnect():
     uri = "postgres://postgres:pass@localhost/blogger" 
     engine = sa.create_engine(uri, echo=False)

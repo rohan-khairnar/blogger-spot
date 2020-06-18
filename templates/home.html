@@ -1,0 +1,45 @@
+{%extends "base.html"%}
+{% block content %}
+<script src="{{url_for('static', filename='js/home.js')}}"></script>
+<link rel="stylesheet" href="{{url_for('static',filename = 'css/home.css')}}">
+
+<!-- Profile Area -->
+<div class="profile">
+    <div class="pro-head">
+        <strong>--- My Profile ---</strong>
+        </div><br>
+        <div class="pro-details" hidden>
+        <b>Name : </b> <small id="username"></small><br>
+        <b>Login Id : </b> <small id="loginid"></small><br>
+        <br>
+        <a href="/blog"> <button> Add New Blog</button> </a>
+    </div>
+</div>
+<!-- Profile Area ends -->
+
+<!-- Blogs area -->
+<div class="blogs">
+
+    {%for data in blogs_data%} <!-- Iterating all blogs-->
+    <div class="single_blog">
+        <div class="blog_head">
+            
+            <strong>{{data['blogtitle']}}</strong>
+            <div class='{{data['loginid']}}' hidden style="float: right;">
+               <button  class="edit-btn"> <a class="lni-pencil-alt" href='{{url_for('editBlogPage',blogid=data['blogid'])}}'></a></button>
+            </div><br>
+            <small> <b>Updated On :</b> {{data['entrydate']}}</small><br>
+            <small><b>Owner : </b> {{data['firstname']}} {{data['lastname']}}</small>
+        
+        </div>
+        <div class="blog_desc">
+           {{data['blogdescription']}}
+        </div>
+
+    </div>
+    {%endfor%}
+    
+</div>
+<!-- Blogs Area ends -->
+
+{% endblock %}
