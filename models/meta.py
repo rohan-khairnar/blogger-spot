@@ -6,16 +6,16 @@ import os
 
 # It will create database at innitial.
 def dbcreate():
-    uri = "postgres://postgres:pass@localhost"
-    eng = sa.create_engine(uri, echo=False)
+    url = os.environ.get('DB_URL')
+    eng = sa.create_engine(url, echo=False)
     conn = eng.connect()
     conn.execute("commit")
     conn.execute("create database blogger")
     conn.close()
-    return (uri+'/blogger')
+    return (url+'/blogger')
 
 # create database engine.
 def dbconnect():
-    uri = "postgres://postgres:pass@localhost/blogger" 
-    engine = sa.create_engine(uri, echo=False)
+    url = os.environ.get('DB_URL')+"/blogger" 
+    engine = sa.create_engine(url, echo=False)
     return engine
